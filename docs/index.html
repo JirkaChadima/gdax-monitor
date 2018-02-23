@@ -41,11 +41,14 @@
                 routes
             });
 
+            var autoPlayRoutes = true;
+
             var app = new Vue({
                 el: '#app',
                 router,
                 data: {
-                    lastRouteIndex: 0
+                    lastRouteIndex: 0,
+                    autoPlayRoutes: true
                 },
                 created: function () {
                     this.autoLoadNextPage();
@@ -57,7 +60,10 @@
                         if (self.lastRouteIndex >= routes.length) {
                             self.lastRouteIndex = 0;
                         }
-                        router.push(routes[self.lastRouteIndex].path);
+
+                        if (autoPlayRoutes) {
+                            router.push(routes[self.lastRouteIndex].path);
+                        }
 
                         setTimeout(self.autoLoadNextPage, routes[self.lastRouteIndex].pageTimeout);
                     }
