@@ -21,6 +21,7 @@ const PageGdaxPrice = {
                     <img src="//jirkachadima.github.io/gdax-monitor/assets/lif-logo.svg" style="height:100px;" />
                     <h1 class="display-5"><em>k</em>LÍF</h1>
                     <h3 class="display-5"><small class="text-secondary">ETH</small> <span id="ETH-kLIF"><loader style="display:inline"></loader></span></h3>
+                    <h3 class="display-5">&nbsp;</h3>
                     <!--<h3 class="display-5"><small class="text-secondary">USD</small> <span id="LIF-USD"><loader style="display:inline"></loader></span></h3>-->
                 </div>
             </div>
