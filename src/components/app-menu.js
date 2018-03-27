@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 Vue.component('app-menu', {
     template: `
         <div class="row">
@@ -9,20 +11,23 @@ Vue.component('app-menu', {
                 </div>
             </div>
             <div class="col-sm text-right">
-                <button v-if="autoPlayRoutes" v-on:click="toggleAutoPlayRoutes()" class="btn btn-primary btn-sm">autoplay: ENABLED</button>
-                <button v-if="!autoPlayRoutes" v-on:click="toggleAutoPlayRoutes()" class="btn btn-secondary btn-sm">autoplay: DISABLED</button>
+                <button v-if="autoPlayRoutes" v-on:click="toggleAutoplay()" class="btn btn-primary btn-sm">autoplay: ENABLED</button>
+                <button v-if="!autoPlayRoutes" v-on:click="toggleAutoplay()" class="btn btn-secondary btn-sm">autoplay: DISABLED</button>
             </div>
         </div>
     `,
+    props: [
+        'toggleAutoPlayRoutes'
+    ],
     data: function () {
         return {
-            autoPlayRoutes: autoPlayRoutes
+            autoPlayRoutes: true
         }
     },
     methods: {
-        toggleAutoPlayRoutes: function () {
-            autoPlayRoutes = !autoPlayRoutes;
-            this.autoPlayRoutes = autoPlayRoutes;
+        toggleAutoplay: function () {
+            this.autoPlayRoutes = !this.autoPlayRoutes;
+            this.toggleAutoPlayRoutes();
         }
     },
     created: function () {

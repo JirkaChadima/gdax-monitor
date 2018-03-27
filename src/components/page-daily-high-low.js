@@ -55,3 +55,5 @@ const PageDailyHighLow = {
         }
     }
 };
+
+export default PageDailyHighLow;
