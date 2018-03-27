@@ -2,11 +2,11 @@ const PhotoBooth = {
     template: `
         <div>
             <div class="row align-items-center" style="height:430px;">
-                <div class="col-md" style="width: 70%; padding-top: 5px;">
-                    <img id="last-snap" height="420px" />
+                <div class="col-md" style="width: 70%; position: absolute; left: 0; top: 35px; padding: 0">
+                    <img id="last-snap" style="height: 440px" />
                 </div>
-                <div class="col-sm text-center">
-                    <video id="camera-stream" style="max-width: 320px;"></video>
+                <div class="text-center" style="background-color: white; position: absolute; right: 0; top: 35px; border-left: 5px solid white;">
+                    <video id="camera-stream" style="max-width: 240px;"></video>
                     <p>
                         <a href="#" id="take-photo" v-on:click="takeSnapshot()" class="btn btn-primary btn-xl" title="Take Photo">Snap!</a>
                     </p>
