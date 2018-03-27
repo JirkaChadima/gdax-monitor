@@ -8,6 +8,7 @@ Vue.component('app-menu', {
                     <router-link to="/" class="btn btn-secondary btn-sm">home</router-link>
                     <router-link to="/gdax-price" class="btn btn-secondary btn-sm">price</router-link>
                     <router-link to="/daily-high-low" class="btn btn-secondary btn-sm">graph</router-link>
+                    <router-link to="/photo-booth" class="btn btn-secondary btn-sm">photos</router-link>
                 </div>
             </div>
             <div class="col-sm text-right">
