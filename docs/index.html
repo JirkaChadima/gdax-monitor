@@ -8,67 +8,14 @@
 
         <title>Crypto monitor</title>
 
-        <script src="//cdn.jsdelivr.net/npm/vue@2.5.13"></script>
-        <script src="//cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.js"></script>
-
         <script src="//www.amcharts.com/lib/3/amcharts.js"></script>
         <script src="//www.amcharts.com/lib/3/serial.js"></script>
         <script src="//www.amcharts.com/lib/3/pie.js"></script>
-
-        <script src="//cdn.jsdelivr.net/npm/moment@2.20.1/moment.min.js"></script>
-
-        <script src="//jirkachadima.github.io/gdax-monitor/components/app-menu.js"></script>
-        <script src="//jirkachadima.github.io/gdax-monitor/components/loader.js"></script>
-        <link rel="stylesheet" href="//jirkachadima.github.io/gdax-monitor/components/loader.css">
-        <script src="//jirkachadima.github.io/gdax-monitor/components/page-home.js"></script>
-        <script src="//jirkachadima.github.io/gdax-monitor/components/page-gdax-price.js"></script>
-        <script src="//jirkachadima.github.io/gdax-monitor/components/page-daily-high-low.js"></script>
     </head>
     <body>
         <div id="app" class="container">
-            <app-menu></app-menu>
+            <app-menu v-bind="{toggleAutoPlayRoutes}"></app-menu>
             <router-view></router-view>
         </div>
-
-        <script>
-            const routes = [
-                { path: '/', component: PageHome, pageTimeout: 10000 },
-                { path: '/gdax-price', component: PageGdaxPrice, pageTimeout: 30000 },
-                { path: '/daily-high-low', component: PageDailyHighLow, pageTimeout: 30000 }
-            ];
-
-            const router = new VueRouter({
-                routes
-            });
-
-            var autoPlayRoutes = true;
-
-            var app = new Vue({
-                el: '#app',
-                router,
-                data: {
-                    lastRouteIndex: 0,
-                    autoPlayRoutes: true
-                },
-                created: function () {
-                    this.autoLoadNextPage();
-                },
-                methods: {
-                    autoLoadNextPage: function () {
-                        var self = this;
-                        self.lastRouteIndex++;
-                        if (self.lastRouteIndex >= routes.length) {
-                            self.lastRouteIndex = 0;
-                        }
-
-                        if (autoPlayRoutes) {
-                            router.push(routes[self.lastRouteIndex].path);
-                        }
-
-                        setTimeout(self.autoLoadNextPage, routes[self.lastRouteIndex].pageTimeout);
-                    }
-                }
-            });
-        </script>
-    </body>
+    <script type="text/javascript" src="/gdax-monitor/vendors~index-4b1c6773017b9a57e04d.min.js"></script><script type="text/javascript" src="/gdax-monitor/index-4b1c6773017b9a57e04d.min.js"></script></body>
 </html>
