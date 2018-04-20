@@ -20,9 +20,9 @@ const PageGdaxPrice = {
                 <div class="col-sm text-center">
                     <img src="assets/lif-logo.svg" style="height:100px;" />
                     <h1 class="display-5"><em>k</em>LÍF</h1>
-                    <h3 class="display-5"><small class="text-secondary">ETH</small> <span id="ETH-kLIF"><loader style="display:inline"></loader></span></h3>
-                    <h3 class="display-5">&nbsp;</h3>
-                    <!--<h3 class="display-5"><small class="text-secondary">USD</small> <span id="LIF-USD"><loader style="display:inline"></loader></span></h3>-->
+                    <h3 class="display-5"><small class="text-secondary">ETH (Idex)</small> <span id="idex-ETH-kLIF"><loader style="display:inline"></loader></span></h3>
+                    <!--<h4 class="display-5"><small class="text-secondary">ETH (OTCBTC)</small> <span id="otcbtc-ETH-kLIF"><loader style="display:inline"></loader></span></h4>-->
+                    <!--<h4 class="display-5"><small class="text-secondary">Yobit</small> <span id="yobit-ETH-kLIF"><loader style="display:inline"></loader></span></h4>-->
                 </div>
             </div>
         </div>
@@ -82,18 +82,50 @@ const PageGdaxPrice = {
             console.log('closed');
         };
 
-        let refreshLif = () => {
+        let lifFromIdex = () => {
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'https://api.idex.market/returnTicker');
             xhr.setRequestHeader("Content-type", "application/json");
-
             xhr.onload = function () {
                 let lifData = JSON.parse(xhr.responseText);
-                updateTarget('ETH-kLIF', lifData.last ? lifData.last * 1000 : 'N/A');
+                updateTarget('idex-ETH-kLIF', lifData.last ? lifData.last * 1000 : 'N/A');
             };
             xhr.send(JSON.stringify({
                 market: 'ETH_LIF'
             }));
+        }
+
+        let lifFromOtcBtc = () => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://bb.otcbtc.com/api/v2/tickers/lifeth');
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onload = function () {
+                let lifData = JSON.parse(xhr.responseText);
+                updateTarget('otcbtc-ETH-kLIF', lifData.ticker.last ? lifData.ticker.last * 1000 : 'N/A');
+            };
+            xhr.send();
+        }
+
+        let lifFromYobit = () => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://yobit.net/api/3/ticker/lif_eth');
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onload = function () {
+                let lifData = JSON.parse(xhr.responseText);
+                updateTarget('yobit-ETH-kLIF', lifData.lif_eth.last ? lifData.lif_eth.last * 1000 : 'N/A');
+                updateLifAverage();
+            };
+            xhr.send(JSON.stringify({
+                market: 'ETH_LIF'
+            }));
+        }
+
+        let refreshLif = () => {
+            lifFromIdex();
+            // OTCBTC has so small volume that the price does not really mean anything
+            // lifFromOtcBtc();
+            // Yobit has issues with CORS for some reason
+            // lifFromYobit();
         };
         refreshLif();
         this.lifInterval = setInterval(refreshLif, 4000);
