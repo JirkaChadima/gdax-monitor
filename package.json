@@ -39,6 +39,7 @@
   "dependencies": {
     "moment": "^2.21.0",
     "vue": "^2.5.16",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "webrtc-adapter": "^6.1.5"
   }
 }

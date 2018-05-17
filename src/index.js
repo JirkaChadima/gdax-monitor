@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import webRTCAdapter from 'webrtc-adapter';
 
 import PageDailyHighLow from './components/page-daily-high-low';
 import PageGdaxPrice from './components/page-gdax-price';
 import PageHome from './components/page-home';
 import PhotoBooth from './components/photo-booth';
+
 
 require('./components/app-menu');
 require('./components/loader.css');

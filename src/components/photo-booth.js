@@ -17,20 +17,16 @@ const PhotoBooth = {
     `,
     created: function () {
         // https://tutorialzine.com/2016/07/take-a-selfie-with-js
-        navigator.getUserMedia(
-            {
+        navigator.mediaDevices.getUserMedia({
                 video: true
-            },
-            function(stream) {
+            }).then(function(stream) {
                 var video = document.querySelector('video#camera-stream');
                 // Create an object URL for the video stream and
                 // set it as src of our HTLM video element.
                 video.src = window.URL.createObjectURL(stream);
                 // Play the video element to show the stream to the user.
                 video.play();
-            },
-            // Error Callback
-            function(err){
+            }).catch(function(err){
                 // Most common errors are PermissionDenied and DevicesNotFound.
                 console.error(err);
             }
