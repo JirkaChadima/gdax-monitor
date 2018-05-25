@@ -16,27 +16,43 @@ const PhotoBooth = {
         </div>
     `,
     created: function () {
-        // https://tutorialzine.com/2016/07/take-a-selfie-with-js
+        var self = this;
         navigator.mediaDevices.getUserMedia({
                 video: true
             }).then(function(stream) {
-                var video = document.querySelector('video#camera-stream');
+                self.video = document.querySelector('video#camera-stream');
                 // Create an object URL for the video stream and
                 // set it as src of our HTLM video element.
-                video.src = window.URL.createObjectURL(stream);
+                self.video.src = window.URL.createObjectURL(stream);
                 // Play the video element to show the stream to the user.
-                video.play();
+                self.video.play();
             }).catch(function(err){
                 // Most common errors are PermissionDenied and DevicesNotFound.
                 console.error(err);
             }
         );
     },
+    data: function () {
+        return {
+            video: null
+        }
+    },
     mounted: function () {
         if (localStorage.lastSnap) {
             var image = document.querySelector('img#last-snap');
             image && image.setAttribute('src', localStorage.lastSnap);
         }
+    },
+    beforeRouteLeave: function(to, from , next)  {
+        // https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack/stop
+        let stream = this.video.srcObject;
+        let tracks = stream.getTracks();
+        tracks.forEach(function(track) {
+        track.stop();
+        });
+
+        this.video.srcObject = null;
+        next();
     },
     methods: {
         // https://jsfiddle.net/dannymarkov/cuumwch5/
