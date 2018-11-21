@@ -5,8 +5,6 @@ import webRTCAdapter from 'webrtc-adapter';
 import PageDailyHighLow from './components/page-daily-high-low';
 import PageGdaxPrice from './components/page-gdax-price';
 import PageHome from './components/page-home';
-import PhotoBooth from './components/photo-booth';
-
 
 require('./components/app-menu');
 require('./components/loader.css');
@@ -18,7 +16,6 @@ const routes = [
     { path: '/', component: PageHome, pageTimeout: 10000 },
     { path: '/gdax-price', component: PageGdaxPrice, pageTimeout: 30000 },
     { path: '/daily-high-low', component: PageDailyHighLow, pageTimeout: 30000 },
-    { path: '/photo-booth', component: PhotoBooth, pageTimeout: 15000 }
 ];
 
 const router = new VueRouter({
