@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import webRTCAdapter from 'webrtc-adapter';
 
-import PageDailyHighLow from './components/page-daily-high-low';
 import PageGdaxPrice from './components/page-gdax-price';
 import PageHome from './components/page-home';
 
@@ -15,7 +14,6 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/', component: PageHome, pageTimeout: 10000 },
     { path: '/gdax-price', component: PageGdaxPrice, pageTimeout: 30000 },
-    { path: '/daily-high-low', component: PageDailyHighLow, pageTimeout: 30000 },
 ];
 
 const router = new VueRouter({
